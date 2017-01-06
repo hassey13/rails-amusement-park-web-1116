@@ -11,17 +11,21 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-          <li><%= link_to "Sign In", signin_path %></li>
-          <li><%= link_to "Sign Up", new_user_path %></li>
+          <li><%= link_to "Log Out", signout_path, method: 'DELETE' %></li>
+          <li><%= link_to "Go on #{@attraction.name}", @attraction %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </div>
 
-<div style="margin: 0 auto; text-align: center;">
-  <br><br>
-  <h1>Welcome to the Amusement Park App!</h1>
-  <img src="http://www.washingtonpost.com/wp-srv/special/health/why-roller-coasters-make-us-scream/images/rollercoasterBackground.jpg" width="550" height="325">
-  <br><br>
-  <%= link_to "Sign in", signin_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", new_user_path %>
-</div>
+<h1><%= @attraction.name %></h1>
+<br>
+<%= form_tag @attraction do %>
+  <%= submit_tag "Go on this ride", id: :"Go on this ride" %>
+<% end %>
+
+<% if current_user.admin %>
+  <%= link_to "Edit Attraction", edit_attraction_path %>
+<% end %>
+
+<br>

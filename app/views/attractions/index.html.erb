@@ -11,17 +11,22 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-          <li><%= link_to "Sign In", signin_path %></li>
-          <li><%= link_to "Sign Up", new_user_path %></li>
+          <li><%= link_to "Log Out", signout_path, method: 'DELETE' %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </div>
 
-<div style="margin: 0 auto; text-align: center;">
-  <br><br>
-  <h1>Welcome to the Amusement Park App!</h1>
-  <img src="http://www.washingtonpost.com/wp-srv/special/health/why-roller-coasters-make-us-scream/images/rollercoasterBackground.jpg" width="550" height="325">
-  <br><br>
-  <%= link_to "Sign in", signin_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", new_user_path %>
-</div>
+<h1>Attractions</h1>
+
+<% @attractions.each do |attraction| %>
+  <% if current_user.admin %>
+  <p> <%= link_to "Show #{attraction.name}", attraction %> </p>
+  <% else %>
+  <p> <%= link_to "Go on #{attraction.name}", attraction %> </p>
+  <% end %>
+<% end %>
+
+<% if current_user.admin %>
+  <%= link_to "New Attraction", new_attraction_path %>
+<% end %>
