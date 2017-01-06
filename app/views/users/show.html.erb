@@ -1,0 +1,10 @@
+<h1><%= current_user.name %></h1>
+<p><%= current_user.password_digest %></p>
+<p><%= "Admin" if current_user.admin %></p>
+<p>Height: <%= current_user.height %></p>
+<p>Mood: <%= current_user.mood %></p>
+<p>Tickets: <%= current_user.tickets %></p>
+
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'delete'}) do %>
+  <%= submit_tag "Log Out" %>
+<% end %>
